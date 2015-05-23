@@ -1,7 +1,7 @@
 #	A function for reading the Constituency-Level Electons Archive 
 #	fixed-width data files
 #	Juraj Medzihorsky
-#	2015-05-19
+#	2015-05-23
 #
 #	The input is the file name, the output a 52-column data.frame
 
@@ -11,8 +11,7 @@ readCLEA <-
         x <- readLines(f, encoding='latin1')
         d <- data.frame(release=as.numeric(substr(x, 1, 1)), stringsAsFactors=FALSE)   
         rs <- function(s) gsub('^\\s+', '', gsub('\\s+$', '', s))
-        na <- function(s) ifelse(s=='-990', NA, s)
-        wrap <- function(b, e) na(rs(substr(x, b, e)))
+        wrap <- function(b, e) rs(substr(x, b, e))
         d$rg      <- wrap(  2,  15)
         d$ctr_n   <- wrap( 16,  45)
         d$ctr     <- wrap( 46,  49)
